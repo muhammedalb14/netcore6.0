@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GB2.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GB2.Data;
 using MvcMovie.Models;
 
 namespace GB2.Controllers
@@ -22,9 +17,9 @@ namespace GB2.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-              return _context.Movie != null ? 
-                          View(await _context.Movie.ToListAsync()) :
-                          Problem("Entity set 'GB2Context.Movie'  is null.");
+            return _context.Movie != null ?
+                        View(await _context.Movie.ToListAsync()) :
+                        Problem("Entity set 'GB2Context.Movie'  is null.");
         }
 
         // GET: Movies/Details/5
@@ -150,14 +145,14 @@ namespace GB2.Controllers
             {
                 _context.Movie.Remove(movie);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MovieExists(int id)
         {
-          return (_context.Movie?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Movie?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
